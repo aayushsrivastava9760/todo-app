@@ -3,10 +3,15 @@ import AddTask from '../components/AddTask'
 import { useEffect, useState } from 'react'
 import axios from '../utils/axios'
 import { useAuth } from '../context/auth'
+import { auth_required } from '../middlewares/auth_required'
 
 export default function Home() {
   const { token } = useAuth()
   const [tasks, setTasks] = useState([])
+
+  //checking auth
+  
+  auth_required()
 
   function getTasks() {
     /***
