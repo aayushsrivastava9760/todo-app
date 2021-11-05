@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from '../utils/axios'
 import { useAuth } from '../context/auth'
 import { useRouter } from 'next/router'
+import { no_auth_required } from '../middlewares/no_auth_required'
 
 export default function RegisterForm() {
 
@@ -9,6 +10,8 @@ export default function RegisterForm() {
   const [password,setPassword] = useState('')
   const { setToken } = useAuth()
   const router = useRouter()
+
+  no_auth_required()
 
   const dataForApiRequest = {
     username,
