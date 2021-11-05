@@ -45,7 +45,7 @@ export default function Home() {
           <span className='inline-block bg-blue-600 py-1 mb-2 px-9 text-sm text-white font-bold rounded-full '>
             Available Tasks
           </span>
-          <TodoListItem tasks={tasks} />
+          {tasks.length > 0 ? tasks.map((task) => <TodoListItem key={task.id} {...task} />) : <h1 className='text-gray-600 py-2'>No tasks to display</h1>}
         </ul>
       </center>
     </div>
