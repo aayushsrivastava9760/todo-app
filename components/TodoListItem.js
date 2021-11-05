@@ -35,7 +35,7 @@ export default function TodoListItem({tasks}) {
       {tasks.map((task)=>{
         const { id, title} = task
         return(
-          <li className='border flex border-gray-500 rounded px-2 py-2 justify-between items-center mb-2'>
+          <li key={id} className='border flex border-gray-500 rounded px-2 py-2 justify-between items-center mb-2'>
             <input
               id={`input-button-${id}`}
               type='text'
