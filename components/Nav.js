@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../context/auth'
 /**
  *
@@ -8,7 +9,27 @@ import { useAuth } from '../context/auth'
  */
 
 export default function Nav() {
-  const { logout, profileName, avatarImage } = useAuth()
+  const { logout, token, profileName, avatarImage } = useAuth()
+
+  const [showProfile,setShowProfile] = useState(false)
+
+  useEffect(()=>{
+    if(!token){
+      setShowProfile(false)
+    }
+    else{
+      setShowProfile(true)
+    }
+  },[])
+
+  useEffect(()=>{
+    if(!token){
+      setShowProfile(false)
+    }
+    else{
+      setShowProfile(true)
+    }
+  },[token])
 
   return (
     <nav className='bg-blue-600'>
@@ -30,6 +51,7 @@ export default function Nav() {
             <Link href='/register'>Register</Link>
           </li>
         </ul>
+        {(showProfile && avatarImage && profileName ) &&
         <div className='inline-block relative w-28'>
           <div className='group inline-block relative'>
             <button className='bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center'>
@@ -56,6 +78,7 @@ export default function Nav() {
             </ul>
           </div>
         </div>
+        }
       </ul>
     </nav>
   )

@@ -6,9 +6,7 @@
  import { useEffect } from "react";
  import { useAuth } from "../context/auth";
  
- export const auth_required = () => {
- 
-     
+ export const no_auth_required = () => {
  
     const router = useRouter()
  
