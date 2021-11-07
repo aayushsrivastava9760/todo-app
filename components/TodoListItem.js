@@ -7,7 +7,7 @@ import { useAuth } from "../context/auth"
 export default function TodoListItem({id,title}) {
 
   const [newTitle,setNewTitle] = useState(title)
-  const { token } = useAuth()
+  const { token, notify } = useAuth()
   const inputRef = useRef(null)
   const doneButtonRef = useRef(null)
   const editAndDeleteButtonRef = useRef(null)
@@ -38,10 +38,10 @@ export default function TodoListItem({id,title}) {
       method:'delete',
     })
       .then(function (data,status){
-        console.log('task was deleted successfully');
+        notify('Task was deleted successfully', 'success')
       })
       .catch(function (error){
-        console.log('some error occurred...');
+        notify('Some error occurred...','error')
       })
 
   }
@@ -69,19 +69,20 @@ export default function TodoListItem({id,title}) {
         data: dataForApiRequest,
       })
         .then(function (data,status){
-          console.log(data);
           editAndDeleteButtonRef.current.className = ''
           titleRef.current.className = 'todo-task  text-gray-600'
           inputRef.current.className = 'hideme'
           doneButtonRef.current.className = 'hideme'
+          notify('Task was updated successfully','success')
         })
         .catch(function (error){
-          console.log('some error occurred...');
+          notify('Some error occurred...','error')
         })
     }
 
     else{
       console.log('please enter valid tasks');
+      notify('Please enter valid task','warn')
     }
   }
 

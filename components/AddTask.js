@@ -5,7 +5,7 @@ import axios from '../utils/axios'
 
 export default function AddTask() {
 
-  const { token } = useAuth()
+  const { token, notify } = useAuth()
 
   const [task,setTask] = useState('')
 
@@ -15,30 +15,40 @@ export default function AddTask() {
      * @todo 1. Send the request to add the task to the backend server.
      * @todo 2. Add the task in the dom.
      */
-    const id = new Date().getTime().toString()
 
-    const dataForApiRequest = {
-      id: id,
-      title: task
+    if(validInputField(task)){
+      const id = new Date().getTime().toString()
+  
+      const dataForApiRequest = {
+        id: id,
+        title: task
+      }
+  
+      axios({
+        headers:{
+          Authorization: `Token ${token}`,
+        },
+        url: '/todo/create/',
+        method: 'post',
+        data: dataForApiRequest,
+      })
+        .then(function (data,status){
+          //console.log(data);
+          notify('Task was added successfully','success')
+        })
+        .catch( function (error){
+          //console.log('some error occurred...');
+          notify('Some error occurred','error')
+        })
+  
+        setTask('')
+    }
+    else{
+      notify('Please enter valid task','warn')
+    }
     }
 
-    axios({
-      headers:{
-        Authorization: `Token ${token}`,
-      },
-      url: '/todo/create/',
-      method: 'post',
-      data: dataForApiRequest,
-    })
-      .then(function (data,status){
-        console.log(data);
-      })
-      .catch( function (error){
-        console.log('some error occurred...');
-      })
 
-      setTask('')
-  }
 
   const validInputField = (text) => {
     if(text !== ''){

@@ -6,7 +6,7 @@ import { useAuth } from '../context/auth'
 import { auth_required } from '../middlewares/auth_required'
 
 export default function Home() {
-  const { token } = useAuth()
+  const { token, notify , profileName } = useAuth()
   const [tasks, setTasks] = useState([])
 
   //checking auth
@@ -32,6 +32,12 @@ export default function Home() {
           console.log('some error occurred...');
         })
   }
+
+  useEffect(()=>{
+    if(profileName !== ''){
+      notify(`Welcome ${profileName} !!`,'basic')
+    }
+  },[])
 
   useEffect(()=>{
     getTasks()
