@@ -1,6 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
+import axios from "axios"
+import { useAuth } from "../context/auth"
+
 export default function TodoListItem({tasks}) {
+
+  const { token } = useAuth()
+
   const editTask = (id) => {
     /**
      * @todo Complete this function.
@@ -14,6 +20,20 @@ export default function TodoListItem({tasks}) {
      * @todo 1. Send the request to delete the task to the backend server.
      * @todo 2. Remove the task from the dom.
      */
+    axios({
+      headers:{
+        Authorization: `Token ${token}`
+      },
+      url: `https://todo-app-csoc.herokuapp.com/todo/${id}/`,
+      method:'delete',
+    })
+      .then(function (data,status){
+        console.log('task was deleted successfully');
+      })
+      .catch(function (error){
+        console.log('some error occurred...');
+      })
+
   }
 
   const updateTask = (id) => {
@@ -46,7 +66,7 @@ export default function TodoListItem({tasks}) {
               <button
                 className='bg-transparent hover:bg-gray-500 text-gray-700 text-sm  hover:text-white py-2 px-3 border border-gray-500 hover:border-transparent rounded todo-update-task'
                 type='button'
-                onClick={updateTask(id)}
+                onClick={() => updateTask(id)}
               >
                 Done
               </button>
@@ -58,7 +78,7 @@ export default function TodoListItem({tasks}) {
               <button
                 style={{ marginRight: '5px' }}
                 type='button'
-                onClick={editTask(id)}
+                onClick={() => editTask(id)}
                 className='bg-transparent hover:bg-yellow-500 hover:text-white border border-yellow-500 hover:border-transparent rounded px-2 py-2'
               >
                 <img
@@ -71,7 +91,7 @@ export default function TodoListItem({tasks}) {
               <button
                 type='button'
                 className='bg-transparent hover:bg-red-500 hover:text-white border border-red-500 hover:border-transparent rounded px-2 py-2'
-                onClick={deleteTask(id)}
+                onClick={() => deleteTask(id)}
               >
                 <img
                   src='https://res.cloudinary.com/nishantwrp/image/upload/v1587486661/CSOC/delete.svg'

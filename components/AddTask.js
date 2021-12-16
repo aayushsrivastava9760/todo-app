@@ -36,6 +36,8 @@ export default function AddTask() {
       .catch( function (error){
         console.log('some error occurred...');
       })
+
+      setTask('')
   }
 
   const validInputField = (text) => {
