@@ -4,7 +4,7 @@ import { useAuth } from '../context/auth'
 import { useRouter } from 'next/router'
 
 export default function Register() {
-  const { setToken } = useAuth()
+  const { setToken, notify } = useAuth()
   const router = useRouter()
 
   const [firstName, setFirstName] = useState('')
@@ -28,10 +28,12 @@ export default function Register() {
       password === ''
     ) {
       console.log('Please fill all the fields correctly.')
+      notify('Please fill all the fields correctly','warn')
       return false
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       console.log('Please enter a valid email address.')
+      notify('Please enter a valid email address','warn')
       return false
     }
     return true
