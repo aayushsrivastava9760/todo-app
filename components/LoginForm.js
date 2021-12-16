@@ -4,7 +4,6 @@ import { useAuth } from '../context/auth'
 import { useRouter } from 'next/router'
 import { no_auth_required } from '../middlewares/no_auth_required'
 
-
 export default function RegisterForm() {
 
   const [username,setUsername] = useState('')
