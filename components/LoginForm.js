@@ -1,4 +1,24 @@
+import { useState } from 'react'
+import axios from '../utils/axios'
+import { useAuth } from '../context/auth'
+import { useRouter } from 'next/router'
+import { no_auth_required } from '../middlewares/no_auth_required'
+
+
 export default function RegisterForm() {
+
+  const [username,setUsername] = useState('')
+  const [password,setPassword] = useState('')
+  const { setToken,token } = useAuth()
+  const router = useRouter()
+
+  no_auth_required()
+
+  const dataForApiRequest = {
+    username,
+    password,
+  }
+
   const login = () => {
     /***
      * @todo Complete this function.
@@ -6,6 +26,31 @@ export default function RegisterForm() {
      * @todo 2. Fetch the auth token from backend and login the user.
      * @todo 3. Set the token in the context (See context/auth.js)
      */
+    if(validInputFields(username,password)){
+      axios
+        .post('/auth/login/',
+        dataForApiRequest
+        )
+          .then(function (data, status){
+            setToken(data.data.token)
+            //router.push('/')
+            router.reload()
+          })
+          .catch(function (err){
+            console.log('some error occurred...');
+          })
+    }
+  }
+
+  const validInputFields = (userName,passWord) => {
+    if(userName !== '' && passWord !== ''){
+      console.log('valid input fields');
+      return true
+    }
+    else{
+      console.log('invalid input fields');
+      return false
+    }
   }
 
   return (
@@ -18,6 +63,8 @@ export default function RegisterForm() {
             className='block border border-grey-light w-full p-3 rounded mb-4'
             name='inputUsername'
             id='inputUsername'
+            value={username}
+            onChange={ (e) => setUsername(e.target.value)}
             placeholder='Username'
           />
 
@@ -26,6 +73,8 @@ export default function RegisterForm() {
             className='block border border-grey-light w-full p-3 rounded mb-4'
             name='inputPassword'
             id='inputPassword'
+            value={password}
+            onChange={ (e) => setPassword(e.target.value)}
             placeholder='Password'
           />
 

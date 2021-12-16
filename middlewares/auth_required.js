@@ -8,14 +8,13 @@ import { useAuth } from "../context/auth";
 
 export const auth_required = () => {
 
-    console.log('auth is required');
-
     const router = useRouter()
 
     const { token } = useAuth()
 
     useEffect(()=>{
         if(!token){
+            console.log('auth is required');
             router.push('/login')
         }
     },[token])
