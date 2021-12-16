@@ -9,7 +9,7 @@ export default function RegisterForm() {
 
   const [username,setUsername] = useState('')
   const [password,setPassword] = useState('')
-  const { setToken,token } = useAuth()
+  const { setToken,token, notify } = useAuth()
   const router = useRouter()
 
   no_auth_required()
@@ -33,22 +33,21 @@ export default function RegisterForm() {
         )
           .then(function (data, status){
             setToken(data.data.token)
-            //router.push('/')
             router.reload()
           })
           .catch(function (err){
-            console.log('some error occurred...');
+            notify('Invalid Username or Password','error')
+            notify('If new user try registering ','info')
           })
     }
   }
 
   const validInputFields = (userName,passWord) => {
     if(userName !== '' && passWord !== ''){
-      console.log('valid input fields');
       return true
     }
     else{
-      console.log('invalid input fields');
+      notify('Invalid input fields','warn')
       return false
     }
   }
