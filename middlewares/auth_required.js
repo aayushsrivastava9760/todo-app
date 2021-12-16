@@ -5,6 +5,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAuth } from "../context/auth";
+import router from "next/router";
 
 export const auth_required = () => {
 
@@ -15,7 +16,8 @@ export const auth_required = () => {
     useEffect(()=>{
         if(!token){
             console.log('auth is required');
-            router.push('/login')
+            //router.push('/login')
+            router.replace('/login/')
         }
     },[token])
 }

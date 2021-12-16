@@ -4,6 +4,7 @@ import axios from '../utils/axios'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import router from 'next/router'
 
 toast.configure()
 
@@ -39,7 +40,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     deleteToken()
     //router.push('/login')
-    router.reload()
+    //router.reload()
+    router.replace('/login/')
   }
 
   useEffect(() => {
