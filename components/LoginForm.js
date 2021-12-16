@@ -3,7 +3,6 @@ import axios from '../utils/axios'
 import { useAuth } from '../context/auth'
 import { useRouter } from 'next/router'
 import { no_auth_required } from '../middlewares/no_auth_required'
-import router from 'next/router'
 
 
 export default function RegisterForm() {
@@ -34,8 +33,7 @@ export default function RegisterForm() {
         )
           .then(function (data, status){
             setToken(data.data.token)
-            //router.reload()
-            Router.replace('/')
+            router.reload()
           })
           .catch(function (err){
             notify('Invalid Username or Password','error')
