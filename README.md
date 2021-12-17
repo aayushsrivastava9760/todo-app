@@ -4,6 +4,6 @@ A todo app made using NextJs and ReactJs .
 
 ### pages
 
--`/`
--`/login/`
--`/register/'
+- `/`
+- `/login/`
+- `/register/'
