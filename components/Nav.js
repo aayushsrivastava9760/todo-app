@@ -20,19 +20,11 @@ export default function Nav() {
     else{
       setShowProfile(true)
     }
-  },[])
-
-  useEffect(()=>{
-    if(!token){
-      setShowProfile(false)
-    }
-    else{
-      setShowProfile(true)
-    }
   },[token])
 
+
   return (
-    <nav className='bg-blue-600'>
+    <nav className='bg-black'>
       <ul className='flex items-center justify-between p-5'>
         <ul className='flex items-center justify-between space-x-4'>
           <li>
@@ -43,15 +35,8 @@ export default function Nav() {
             </Link>
           </li>
         </ul>
-        <ul className='flex'>
-          <li className='text-white mr-2'>
-            <Link href='/login'>Login</Link>
-          </li>
-          <li className='text-white'>
-            <Link href='/register'>Register</Link>
-          </li>
-        </ul>
-        {(showProfile && avatarImage && profileName ) &&
+        
+        {(showProfile && avatarImage && profileName ) ?
         <div className='inline-block relative w-28'>
           <div className='group inline-block relative'>
             <button className='bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center'>
@@ -78,6 +63,15 @@ export default function Nav() {
             </ul>
           </div>
         </div>
+        :
+        <ul className='flex'>
+        <li className='text-white mr-2'>
+          <Link href='/login'>Login</Link>
+        </li>
+        <li className='text-white'>
+          <Link href='/register'>Register</Link>
+        </li>
+      </ul>
         }
       </ul>
     </nav>

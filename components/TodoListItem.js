@@ -97,7 +97,7 @@ export default function TodoListItem({id,title}) {
 
   return (
     <>
-      <li key={id} className='border flex border-gray-500 rounded px-2 py-2 justify-between items-center mb-2'>
+      <li key={id} className='border-2 flex border-gray-500 rounded px-2 py-2 justify-between items-center mb-4 hover:shadow-xl'>
         <input
           id={`input-button-${id}`}
           type='text'
@@ -116,7 +116,7 @@ export default function TodoListItem({id,title}) {
             Done
         </button>
         </div>
-        <div id={`task-${id}`} className='todo-task  text-gray-600' ref={titleRef} >
+        <div id={`task-${id}`} className='todo-task tracking-normal text-2xl  text-gray-600' ref={titleRef} >
           {title}
         </div>
         <span id={`task-actions-${id}`} className='' ref={editAndDeleteButtonRef}>

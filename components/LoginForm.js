@@ -54,7 +54,7 @@ export default function RegisterForm() {
   return (
     <div className='bg-grey-lighter min-h-screen flex flex-col'>
       <div className='container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2'>
-        <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
+        <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full hover:shadow-2xl'>
           <h1 className='mb-8 text-3xl text-center'>Login</h1>
           <input
             type='text'
