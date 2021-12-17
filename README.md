@@ -6,4 +6,4 @@ A todo app made using NextJs and ReactJs .
 
 - `/`
 - `/login/`
-- `/register/'
+- `/register/`
