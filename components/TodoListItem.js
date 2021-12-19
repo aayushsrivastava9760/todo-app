@@ -70,7 +70,7 @@ export default function TodoListItem({id,title}) {
       })
         .then(function (data,status){
           editAndDeleteButtonRef.current.className = ''
-          titleRef.current.className = 'todo-task  text-gray-600'
+          titleRef.current.className = 'todo-task tracking-normal text-2xl  text-gray-600'
           inputRef.current.className = 'hideme'
           doneButtonRef.current.className = 'hideme'
           notify('Task was updated successfully','success')
